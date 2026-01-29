@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-01-29T12:52:16Z",
+  "has_previous": true,
+  "current_date": "2026-01-29",
+  "comparison_date": "2026-01-27",
+  "days_between": 2,
+  "summary": {
+    "issues_worked": {
+      "value": 135,
+      "previous": 132,
+      "delta": 3,
+      "pct_change": 2
+    },
+    "issues_completed": {
+      "value": 73,
+      "previous": 67,
+      "delta": 6,
+      "pct_change": 9
+    },
+    "hours_logged": {
+      "value": 1006,
+      "previous": 990,
+      "delta": 16,
+      "pct_change": 2
+    },
+    "commits": {
+      "value": 100,
+      "previous": 90,
+      "delta": 10,
+      "pct_change": 11
+    },
+    "pull_requests": {
+      "value": 100,
+      "previous": 95,
+      "delta": 5,
+      "pct_change": 5
+    },
+    "reviews": {
+      "value": 100,
+      "previous": 95,
+      "delta": 5,
+      "pct_change": 5
+    },
+    "repos_touched": {
+      "value": 35,
+      "previous": 35,
+      "delta": 0,
+      "pct_change": 0
+    }
+  },
+  "highlights": [
+    "Completed 6 issues",
+    "Opened 5 pull requests",
+    "Reviewed 5 PRs",
+    "Made 10 commits",
+    "Logged 16 hours"
+  ]
+}

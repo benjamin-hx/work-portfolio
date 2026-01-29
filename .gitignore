@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+
+# Tokens (never commit these)
+*.token
+
+# Local temp files
+/tmp/
+
+# Raw data - contains sensitive company info
+# Only public/ folder is committed
+data/jira/
+data/github/
+data/history/
+data/portfolio.json
+data/stats.json
+data/diff-report.json
+data/history-summary.json
+data/resume-updates.md

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb',
+            secondary: '#64748b'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .stat-card { transition: transform 0.2s; }
+    .stat-card:hover { transform: translateY(-2px); }
+    .skill-tag { transition: all 0.2s; }
+    .skill-tag:hover { transform: scale(1.05); }
+    .delta-positive { color: #10b981; }
+    .delta-negative { color: #ef4444; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <header class="mb-10">
+      <h1 class="text-3xl font-bold text-gray-900" id="profile-name">Work Portfolio</h1>
+      <p class="text-lg text-secondary mt-1" id="profile-title">Loading...</p>
+      <p class="text-sm text-gray-500 mt-1">
+        <span id="date-range"></span>
+        Updated: <span id="generated-at">Loading...</span>
+      </p>
+    </header>
+
+    <!-- Recent Activity - Diff Report -->
+    <section class="mb-10" id="recent-activity-section" style="display: none;">
+      <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
+      <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg shadow p-6">
+        <p class="text-sm text-secondary mb-3" id="activity-period"></p>
+        <div class="flex flex-wrap gap-3" id="activity-highlights">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary Stats - Aggregate numbers only -->
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Summary</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-primary" id="stat-issues">-</div>
+          <div class="text-sm text-secondary">Issues Worked</div>
+          <div class="text-xs mt-1" id="delta-issues"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-green-600" id="stat-completed">-</div>
+          <div class="text-sm text-secondary">Completed</div>
+          <div class="text-xs mt-1" id="delta-completed"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-indigo-600" id="stat-hours">-</div>
+          <div class="text-sm text-secondary">Hours Logged</div>
+          <div class="text-xs mt-1" id="delta-hours"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-pink-600" id="stat-repos">-</div>
+          <div class="text-sm text-secondary">Repositories</div>
+          <div class="text-xs mt-1" id="delta-repos"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-purple-600" id="stat-commits">-</div>
+          <div class="text-sm text-secondary">Commits</div>
+          <div class="text-xs mt-1" id="delta-commits"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-orange-600" id="stat-prs">-</div>
+          <div class="text-sm text-secondary">Pull Requests</div>
+          <div class="text-xs mt-1" id="delta-prs"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-teal-600" id="stat-reviews">-</div>
+          <div class="text-sm text-secondary">Code Reviews</div>
+          <div class="text-xs mt-1" id="delta-reviews"></div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-cyan-600" id="stat-projects">-</div>
+          <div class="text-sm text-secondary">Projects</div>
+          <div class="text-xs text-gray-400">Cross-team scope</div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-rose-600" id="stat-review-ratio">-</div>
+          <div class="text-sm text-secondary">Review Ratio</div>
+          <div class="text-xs text-gray-400">Reviews per PR</div>
+        </div>
+        <div class="stat-card bg-white rounded-lg shadow p-5">
+          <div class="text-2xl font-bold text-emerald-600" id="stat-completion">-</div>
+          <div class="text-sm text-secondary">Completion Rate</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Time Investment by Theme - Generic categories -->
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Focus Areas</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <canvas id="theme-pie-chart" height="200"></canvas>
+          </div>
+          <div class="space-y-3" id="time-breakdown">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologies - Generic skills -->
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Technologies</h2>
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex flex-wrap gap-2" id="skills-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm text-gray-500 mt-12 pb-8">
+      <p id="footer-links"></p>
+      <p class="mt-2 text-xs text-gray-400">
+        Auto-generated from work tracking data
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Generic theme labels - no company-specific names
+    const themeLabels = {
+      'Cloud SQL/Database': 'Database & Storage',
+      'GKE/Kubernetes': 'Container Orchestration',
+      'Monitoring/Observability': 'Monitoring & Observability',
+      'Cloudflare/Zero Trust': 'Network Security',
+      'Security': 'Security & Compliance',
+      'AWS': 'Cloud Infrastructure (AWS)',
+      'CI/CD & DevOps': 'CI/CD & Automation'
+    };
+
+    const chartColors = ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#ec4899'];
+    const basePath = window.location.pathname.includes('/site/') ? '../data/public/' : './data/public/';
+
+    let pieChart;
+
+    async function loadData() {
+      try {
+        const [portfolioRes, statsRes] = await Promise.all([
+          fetch(basePath + 'portfolio.json'),
+          fetch(basePath + 'stats.json')
+        ]);
+
+        const portfolio = await portfolioRes.json();
+        const stats = await statsRes.json();
+
+        // Try to load diff report (may not exist)
+        let diffReport = null;
+        try {
+          const diffRes = await fetch(basePath + 'diff-report.json');
+          diffReport = await diffRes.json();
+        } catch (e) {}
+
+        renderData(portfolio, stats, diffReport);
+      } catch (e) {
+        console.error('Failed to load data:', e);
+        document.body.innerHTML = `
+          <div class="max-w-2xl mx-auto p-8 text-center">
+            <h1 class="text-2xl font-bold mb-4">Work Portfolio</h1>
+            <p class="text-red-600 mb-4">Failed to load data.</p>
+          </div>`;
+      }
+    }
+
+    function formatDelta(delta) {
+      if (delta === 0) return '';
+      const sign = delta > 0 ? '+' : '';
+      const cls = delta > 0 ? 'delta-positive' : 'delta-negative';
+      return `<span class="${cls}">${sign}${delta}</span>`;
+    }
+
+    function renderData(data, stats, diffReport) {
+      const { profile, summary } = data;
+
+      // Profile
+      if (profile?.name) {
+        document.title = `${profile.name} - Work Portfolio`;
+        document.getElementById('profile-name').textContent = profile.name;
+      }
+      if (profile?.title && profile?.company) {
+        document.getElementById('profile-title').textContent = `${profile.title} @ ${profile.company}`;
+      }
+      if (profile?.start_date) {
+        const startDate = new Date(profile.start_date).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+        document.getElementById('date-range').textContent = `${startDate} - Present · `;
+      }
+      document.getElementById('generated-at').textContent = new Date(data.generated_at).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      });
+
+      // Footer links
+      const links = [];
+      if (profile?.github) links.push(`<a href="https://github.com/${profile.github}" class="text-primary hover:underline">GitHub</a>`);
+      if (profile?.linkedin) links.push(`<a href="https://linkedin.com/in/${profile.linkedin}" class="text-primary hover:underline">LinkedIn</a>`);
+      if (profile?.email) links.push(`<a href="mailto:${profile.email}" class="text-primary hover:underline">Email</a>`);
+      document.getElementById('footer-links').innerHTML = links.join(' · ');
+
+      // Aggregate stats only
+      document.getElementById('stat-issues').textContent = summary.jira.total_issues;
+      document.getElementById('stat-completed').textContent = summary.jira.completed;
+      document.getElementById('stat-commits').textContent = summary.github.commits > 99 ? '100+' : summary.github.commits;
+      document.getElementById('stat-prs').textContent = summary.github.pull_requests > 99 ? '100+' : summary.github.pull_requests;
+      document.getElementById('stat-reviews').textContent = summary.github.reviews > 99 ? '100+' : summary.github.reviews;
+      document.getElementById('stat-hours').textContent = summary.jira.total_hours.toLocaleString();
+      document.getElementById('stat-repos').textContent = summary.github.repos_count || 0;
+
+      // Staff-level metrics
+      document.getElementById('stat-projects').textContent = summary.jira.projects_count || 0;
+      document.getElementById('stat-review-ratio').textContent = (summary.github.review_ratio || 0) + 'x';
+
+      // Completion rate
+      const completionRate = summary.jira.total_issues > 0
+        ? Math.round((summary.jira.completed / summary.jira.total_issues) * 100)
+        : 0;
+      document.getElementById('stat-completion').textContent = completionRate + '%';
+
+      // Diff report - deltas and highlights
+      if (diffReport?.has_previous) {
+        // Show recent activity section
+        document.getElementById('recent-activity-section').style.display = 'block';
+        document.getElementById('activity-period').textContent =
+          `Since ${new Date(diffReport.comparison_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}`;
+
+        // Highlights
+        const highlightsContainer = document.getElementById('activity-highlights');
+        if (diffReport.highlights?.length > 0) {
+          highlightsContainer.innerHTML = diffReport.highlights.map(h =>
+            `<span class="bg-white px-3 py-1 rounded-full text-sm font-medium text-gray-700 shadow-sm">${h}</span>`
+          ).join('');
+        } else {
+          highlightsContainer.innerHTML = '<span class="text-sm text-secondary">No changes since last update</span>';
+        }
+
+        // Deltas on stat cards
+        const s = diffReport.summary;
+        document.getElementById('delta-issues').innerHTML = formatDelta(s.issues_worked?.delta || 0);
+        document.getElementById('delta-completed').innerHTML = formatDelta(s.issues_completed?.delta || 0);
+        document.getElementById('delta-hours').innerHTML = formatDelta(s.hours_logged?.delta || 0);
+        document.getElementById('delta-commits').innerHTML = formatDelta(s.commits?.delta || 0);
+        document.getElementById('delta-prs').innerHTML = formatDelta(s.pull_requests?.delta || 0);
+        document.getElementById('delta-reviews').innerHTML = formatDelta(s.reviews?.delta || 0);
+        document.getElementById('delta-repos').innerHTML = formatDelta(s.repos_touched?.delta || 0);
+      }
+
+      // Time by Theme (generalized labels)
+      renderTimeChart(stats.time_by_theme || []);
+
+      // Skills
+      renderSkills(stats.skills || []);
+    }
+
+    function renderTimeChart(timeByTheme) {
+      const ctx = document.getElementById('theme-pie-chart').getContext('2d');
+      const filtered = timeByTheme.filter(t => t.hours > 0);
+
+      if (pieChart) pieChart.destroy();
+      pieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: filtered.map(t => themeLabels[t.theme] || t.theme),
+          datasets: [{
+            data: filtered.map(t => t.hours),
+            backgroundColor: chartColors.slice(0, filtered.length)
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // Text breakdown with generalized labels
+      const totalHours = filtered.reduce((sum, t) => sum + t.hours, 0);
+      const container = document.getElementById('time-breakdown');
+      container.innerHTML = filtered.map((t, i) => {
+        const pct = Math.round((t.hours / totalHours) * 100);
+        const label = themeLabels[t.theme] || t.theme;
+        return `
+          <div class="flex items-center gap-3">
+            <div class="w-3 h-3 rounded-full" style="background: ${chartColors[i]}"></div>
+            <div class="flex-1 text-sm">${label}</div>
+            <div class="text-sm font-medium">${t.hours}h</div>
+            <div class="text-xs text-secondary w-10 text-right">${pct}%</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderSkills(skills) {
+      const container = document.getElementById('skills-container');
+      container.innerHTML = skills.map(skill =>
+        `<span class="skill-tag px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700">${skill}</span>`
+      ).join('');
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

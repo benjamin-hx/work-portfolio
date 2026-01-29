@@ -1,0 +1,41 @@
+{
+  "profile": {
+    "name": "Benjamin Sunday",
+    "title": "Senior Site Reliability Engineer",
+    "company": "Holiday Extras",
+    "email": "benjamin.cloudengineer@gmail.com",
+    "github": "benjamin-hx",
+    "linkedin": "benjaminsunday",
+    "start_date": "2024-11-01"
+  },
+  "themes": {
+    "cloudflare": {
+      "label": "Cloudflare / Zero Trust",
+      "patterns": ["cloudflare", "zero trust", "WARP", "access", "gateway"]
+    },
+    "kubernetes": {
+      "label": "Kubernetes / GKE",
+      "patterns": ["GKE", "kubernetes", "k8s", "cluster", "dockyard", "node", "pod"]
+    },
+    "cicd": {
+      "label": "CI/CD & DevOps",
+      "patterns": ["ci-service", "deploy", "pipeline", "github", "terraform", "argocd"]
+    },
+    "database": {
+      "label": "Cloud SQL / Databases",
+      "patterns": ["sql", "database", "postgres", "mysql", "cloudsql"]
+    },
+    "security": {
+      "label": "Security",
+      "patterns": ["security", "vulnerability", "scanning", "posture", "auth"]
+    },
+    "aws": {
+      "label": "AWS",
+      "patterns": ["AWS", "S3", "EC2", "lambda"]
+    },
+    "monitoring": {
+      "label": "Monitoring / Observability",
+      "patterns": ["grafana", "monitoring", "alert", "log", "metric"]
+    }
+  }
+}

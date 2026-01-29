@@ -1,0 +1,54 @@
+{
+  "time_by_theme": [
+    {
+      "theme": "kubernetes",
+      "hours": 132,
+      "count": 8
+    },
+    {
+      "theme": "monitoring",
+      "hours": 130,
+      "count": 7
+    },
+    {
+      "theme": "database",
+      "hours": 119,
+      "count": 16
+    },
+    {
+      "theme": "security",
+      "hours": 86,
+      "count": 4
+    },
+    {
+      "theme": "cloudflare",
+      "hours": 85,
+      "count": 14
+    },
+    {
+      "theme": "aws",
+      "hours": 16,
+      "count": 5
+    },
+    {
+      "theme": "cicd",
+      "hours": 14,
+      "count": 8
+    }
+  ],
+  "skills": [
+    "AWS",
+    "CI/CD",
+    "Cloudflare",
+    "Docker",
+    "GCP",
+    "Grafana",
+    "Kubernetes",
+    "MySQL",
+    "Node.js",
+    "PostgreSQL",
+    "Python",
+    "Security",
+    "Terraform"
+  ]
+}

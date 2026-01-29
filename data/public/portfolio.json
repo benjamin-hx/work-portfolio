@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-01-29T12:52:16Z",
+  "profile": {
+    "name": "Benjamin Sunday",
+    "title": "Senior Site Reliability Engineer",
+    "company": "Holiday Extras",
+    "email": "benjamin.cloudengineer@gmail.com",
+    "github": "benjamin-hx",
+    "linkedin": "benjaminsunday",
+    "start_date": "2024-11-01"
+  },
+  "summary": {
+    "jira": {
+      "total_issues": 135,
+      "completed": 73,
+      "in_progress": 6,
+      "total_hours": 1006,
+      "projects_count": 6
+    },
+    "github": {
+      "commits": 100,
+      "pull_requests": 100,
+      "reviews": 100,
+      "repos_count": 35,
+      "review_ratio": 1
+    }
+  }
+}
