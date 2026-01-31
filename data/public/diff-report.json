@@ -1,58 +1,58 @@
 {
-  "generated_at": "2026-01-29T12:52:16Z",
+  "generated_at": "2026-01-31T18:13:30Z",
   "has_previous": true,
-  "current_date": "2026-01-29",
+  "current_date": "2026-01-31",
   "comparison_date": "2026-01-27",
-  "days_between": 2,
+  "days_between": 4,
   "summary": {
     "issues_worked": {
-      "value": 135,
+      "value": 138,
       "previous": 132,
-      "delta": 3,
-      "pct_change": 2
+      "delta": 6,
+      "pct_change": 5
     },
     "issues_completed": {
-      "value": 73,
+      "value": 76,
       "previous": 67,
-      "delta": 6,
-      "pct_change": 9
+      "delta": 9,
+      "pct_change": 13
     },
     "hours_logged": {
-      "value": 1006,
+      "value": 1044,
       "previous": 990,
-      "delta": 16,
-      "pct_change": 2
+      "delta": 54,
+      "pct_change": 5
     },
     "commits": {
-      "value": 100,
+      "value": 389,
       "previous": 90,
-      "delta": 10,
-      "pct_change": 11
+      "delta": 299,
+      "pct_change": 332
     },
     "pull_requests": {
-      "value": 100,
+      "value": 276,
       "previous": 95,
-      "delta": 5,
-      "pct_change": 5
+      "delta": 181,
+      "pct_change": 191
     },
     "reviews": {
-      "value": 100,
+      "value": 167,
       "previous": 95,
-      "delta": 5,
-      "pct_change": 5
+      "delta": 72,
+      "pct_change": 76
     },
     "repos_touched": {
-      "value": 35,
+      "value": 79,
       "previous": 35,
-      "delta": 0,
-      "pct_change": 0
+      "delta": 44,
+      "pct_change": 126
     }
   },
   "highlights": [
-    "Completed 6 issues",
-    "Opened 5 pull requests",
-    "Reviewed 5 PRs",
-    "Made 10 commits",
-    "Logged 16 hours"
+    "Completed 9 issues",
+    "Opened 181 pull requests",
+    "Reviewed 72 PRs",
+    "Made 299 commits",
+    "Logged 54 hours"
   ]
 }

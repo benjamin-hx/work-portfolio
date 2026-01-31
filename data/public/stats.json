@@ -7,13 +7,18 @@
     },
     {
       "theme": "monitoring",
-      "hours": 130,
-      "count": 7
+      "hours": 131,
+      "count": 8
     },
     {
       "theme": "database",
       "hours": 119,
-      "count": 16
+      "count": 17
+    },
+    {
+      "theme": "cloudflare",
+      "hours": 86,
+      "count": 15
     },
     {
       "theme": "security",
@@ -21,14 +26,9 @@
       "count": 4
     },
     {
-      "theme": "cloudflare",
-      "hours": 85,
-      "count": 14
-    },
-    {
       "theme": "aws",
-      "hours": 16,
-      "count": 5
+      "hours": 22,
+      "count": 6
     },
     {
       "theme": "cicd",
